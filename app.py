@@ -7,8 +7,8 @@ app.secret_key = 'dummy'
 @app.route('/')
 def index():
     flash('Salut','success')
-    flash('pas cool','error')
-    flash('heho','info')
+    flash('pas cool','danger')
+    flash('heho','warning')
     return render_template("index.html")
 
 
@@ -31,6 +31,9 @@ def sign_up():
 def dashboard():
     pass
 
+@app.errorhandler(404)
+def error404(e):
+    return render_template("404.html")
 
 if __name__ == '__main__':
     app.run()
