@@ -1,4 +1,18 @@
 {% extends "base.html" %}
 {% block the_body %}
-    login
+    <div class="container bg-light border rounded shadow p-4">
+        <h1>Connexion</h1>
+        <br>
+        <form method="post">
+            {{ form.hidden_tag() }}
+
+            {{ form.user_name.label(class="form-label") }}
+            {{ form.user_name(class="form-control mb-3") }}
+
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control mb-3") }}
+
+            {{ form.submit (class="btn btn-outline-primary" ) }}
+        </form>
+    </div>
 {% endblock %}

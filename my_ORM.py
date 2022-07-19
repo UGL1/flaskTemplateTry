@@ -34,3 +34,6 @@ class UserDB(db.Model, UserMixin):
 
     def password_match(self, password: str) -> bool:
         return check_password_hash(self.password_hash, password)
+
+#u = UserDB(user_name="UGLi",first_name="Fred",last_name="Leleu",email="ugli@mailo.com",password="salut")
+
