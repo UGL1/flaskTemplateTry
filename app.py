@@ -19,16 +19,20 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/login')
+@app.route('/login', methods=['get','post'])
 def log_in():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = UserDB.query.filter_by(user_name=form.user_name.data).first()
+        if not user:
+            flash(f"Le nom d'utilisateur {form.user_name.data} n'existe pas.","danger")
+        elif not user.password_match(form.password.data):
+            flash("Mot de passe incorrect.","danger")
+        else:
+            flash(f"Bienvenue {form.user_name.data} !","success")
+            return redirect(url_for("dashboard"))
+        form.user_name.data = ""
     return render_template("login.html", form=form)
-
-
-@app.route('/logout')
-def log_out():
-    flash("Vous êtes déconnecté", "success")
-    return redirect(url_for("index"))
 
 
 @app.route('/signup', methods=['get', 'post'])
@@ -65,6 +69,12 @@ def sign_up():
                     return redirect(url_for("log_in"))
 
     return render_template("signup.html", form=form)
+
+@app.route('/logout')
+def log_out():
+    flash("Vous êtes déconnecté", "success")
+    return redirect(url_for("index"))
+
 
 
 @app.route('/dashboard')
