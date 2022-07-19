@@ -1,5 +1,6 @@
 # Un modèle d'application Flask
 Avec authentification sécurisée.
+
 *Dépendences :*
 - flask
 - flask-sqlalchemy
