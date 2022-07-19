@@ -1,39 +1,47 @@
-from flask import Flask,flash, render_template, send_from_directory
-import os
+from flask import Flask, render_template, url_for, flash, redirect
 
 app = Flask(__name__)
-app.secret_key = 'dummy'
+
+from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+
+from my_ORM import *
+
+# app creation
+
+
+# needed for forms & login
+app.secret_key = "top cool"
+
 
 @app.route('/')
 def index():
-    flash('Salut','success')
-    flash('pas cool','danger')
-    flash('heho','warning')
     return render_template("index.html")
 
 
 @app.route('/login')
 def log_in():
-    pass
+    return render_template("login.html")
 
 
 @app.route('/logout')
 def log_out():
-    pass
+    return render_template("logout.html")
 
 
 @app.route('/signup')
 def sign_up():
-    pass
+    return render_template("signup.html")
 
 
 @app.route('/dashboard')
 def dashboard():
-    pass
+    return render_template("dashboard.html")
+
 
 @app.errorhandler(404)
 def error404(e):
     return render_template("404.html")
+
 
 if __name__ == '__main__':
     app.run()
