@@ -101,8 +101,9 @@ def sign_up():
 @app.route('/logout')
 @login_required
 def log_out():
+    name = current_user.user_name
     logout_user()
-    flash("Vous êtes déconnecté", "success")
+    flash(f"{name} est déconnecté.", "success")
     return redirect(url_for("index"))
 
 
