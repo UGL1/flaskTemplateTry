@@ -2,6 +2,8 @@ from urllib.parse import urlparse, urljoin
 from flask import Flask, render_template, url_for, flash, redirect,request,abort
 from my_forms import *
 
+
+
 def is_safe_url(target):
     ref_url = urlparse(request.host_url)
     test_url = urlparse(urljoin(request.host_url, target))
